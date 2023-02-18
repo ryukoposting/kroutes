@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.1.1"
+version       = "0.1.2"
 author        = "Evan Perry Grove"
 description   = "Karax router with CSR and SSR support"
 license       = "MIT"
