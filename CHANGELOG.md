@@ -8,6 +8,10 @@ The [master] branch always matches the latest release. The [devel] branch always
 
 ## [Unreleased] - 2023-02-18
 
+- /
+
+## [0.1.2] - 2023-02-18
+
 ### Added
 
 - This changelog!
@@ -16,15 +20,6 @@ The [master] branch always matches the latest release. The [devel] branch always
 ### Changed
 
 - `addRoute` and `addSsrRoute` now perform more strict validation of routing paths. A `ValueError` will be raised when a router path is invalid.
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
-
 
 ## [0.1.1] - 2023-02-18
 
@@ -38,3 +33,4 @@ The [master] branch always matches the latest release. The [devel] branch always
 [master]: https://github.com/ryukoposting/kroutes/tree/master
 [devel]: https://github.com/ryukoposting/kroutes/tree/devel
 [0.1.1]: https://github.com/ryukoposting/kroutes/releases/tag/0.1.1
+[0.1.2]: https://github.com/ryukoposting/kroutes/releases/tag/0.1.2
