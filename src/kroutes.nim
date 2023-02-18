@@ -248,13 +248,17 @@ proc parsePath(path: string): seq[string] =
 proc addRoute*(router: Router, path: string, renderer: RouteRenderer) =
   ## Create a route.
   ## 
-  ## The `path` string works the same way as most routers. Path parameters
-  ## are specified using `{this}` syntax. Here are some examples of
-  ## valid path strings:
+  ## The `path` string works the same way as many routers:
+  ## 
+  ## - Path parameters are specified using `{this}` syntax.
+  ## - Wildcards are specified by an asterisk, and they match one path component.
+  ## 
+  ## Here are some examples of valid path strings:
   ## 
   ## - `"/"`
   ## - `"/profile/{userid}"`
   ## - `"/workspace/{workspace_id}/user/{user_id}"`
+  ## - `"/thing/*"`
   ## 
   ## Support for wildcards will be added in the future.
   assert not renderer.isNil
