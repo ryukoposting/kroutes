@@ -1,0 +1,4 @@
+.vscode
+*.exe
+*.nim.js
+htmldocs

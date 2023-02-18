@@ -1,0 +1,164 @@
+:root {
+    --theme-primary-color: #6002ee;
+    --theme-primary-color-dark: #3d00e0;
+    --theme-primary-color-light: #9965f4;
+    --theme-accent-color: #ee0290;
+    --theme-accent-color-dark: #c6006e;
+    --theme-accent-color-light: #ee4fa6;
+    --theme-on-primary-color: #fff;
+    --theme-on-primary-color-dark: #eee;
+    --theme-on-primary-color-light: #fff;
+
+    --background-color: white;
+    --color: black;
+
+    --link-color: var(--theme-accent-color);
+    --link-color-hover: var(--theme-accent-color-dark);
+    --link-color-active: var(--theme-accent-color-light);
+
+    --header-background-color: var(--theme-primary-color);
+    --header-color: var(--theme-on-primary-color);
+    --header-height: 3rem;
+    --header-padding: 0.5rem 1rem;
+    --header-nav-spacing: 1rem;
+    --header-shadow: 0 0 5px;
+    --header-shadow-color: black;
+    --header-bottom-border: 0.1rem solid var(--theme-primary-color-dark);
+
+    --button-border: 0.1rem solid;
+    --button-border-radius: 0.2rem;
+    --button-padding: 0.5rem;
+    --button-shadow: inset 0 0 3px;
+
+    --button-color: var(--theme-accent-color);
+    --button-color-hover: var(--theme-accent-color-dark);
+    --button-color-active: var(--theme-accent-color-light);
+
+    --button-on-primary-color: var(--theme-on-primary-color);
+    --button-on-primary-color-hover: var(--theme-on-primary-color-dark);
+    --button-on-primary-color-active: var(--theme-on-primary-color-light);
+
+    --main-padding: 0rem 1rem;
+    
+    --footer-padding: 0rem 1rem;
+
+    --font-family: "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, BlinkMacSystemFont, -apple-system, "Helvetica Neue", sans-serif;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #131516;
+        --color: white;
+
+        --link-color: var(--theme-accent-color-light);
+        --link-color-hover: var(--theme-accent-color);
+        --link-color-active: var(--theme-accent-color-dark);
+
+        --header-background-color: var(--theme-primary-color-dark);
+        --header-bottom-border: 0.1rem solid var(--theme-primary-color);
+
+        --button-color-hover: var(--theme-accent-color-light);
+        --button-color-active: var(--theme-accent-color-dark);
+    }
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--color);
+    font-family: var(--font-family);
+}
+
+a {
+    color: var(--link-color);
+}
+
+a:active {
+    color: var(--link-color-active);
+}
+
+a:hover {
+    color: var(--link-color-hover);
+}
+
+header {
+    background-color: var(--header-background-color);
+    position: sticky;
+    top: 0;
+    padding: var(--header-padding);
+    color: var(--header-color);
+    height: var(--header-height);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--header-shadow) var(--header-shadow-color);
+    border-bottom: var(--header-bottom-border);
+}
+
+header nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--header-nav-spacing);
+}
+
+header > * {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+button {
+    background-color: transparent;
+    border: var(--button-border) var(--button-color);
+    border-radius: var(--button-border-radius);
+    padding: var(--button-padding);
+    color: var(--button-color);
+}
+
+button:hover {
+    cursor: pointer;
+    color: var(--button-color-hover);
+    border-color: var(--button-color-hover);
+    box-shadow: var(--button-shadow) var(--button-color-hover);
+}
+
+button:active {
+    cursor: pointer;
+    color: var(--button-color-active);
+    border-color: var(--button-color-active);
+    box-shadow: var(--button-shadow) var(--button-color-active);
+}
+
+header button {
+    color: var(--button-on-primary-color);
+    border-color: var(--button-on-primary-color);
+}
+
+header button:hover {
+    color: var(--button-on-primary-color-hover);
+    border-color: var(--button-on-primary-color-hover);
+    box-shadow: var(--button-shadow) var(--button-on-primary-color-hover);
+}
+
+header button:active {
+    color: var(--button-on-primary-color-active);
+    border-color: var(--button-on-primary-color-active);
+    box-shadow: var(--button-shadow) var(--button-on-primary-color-active);
+}
+
+main {
+    padding: var(--main-padding);
+}
+
+footer {
+    padding: var(--footer-padding);
+}
+
+.next-prev-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
