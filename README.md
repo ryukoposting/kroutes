@@ -1,9 +1,5 @@
 KRoutes is a client-side router for [karax](https://github.com/karaxnim/karax).
 
-# Nimble
-
-`requires "kroutes >= 0.1.1"`
-
 # Features
 
 - Easy to retrofit into existing Karax apps.
