@@ -40,7 +40,3 @@ setRenderer(router)
 # Demo app
 
 The `demo/` directory contains a simple web app using [Prologue](https://planety.github.io/prologue/), [Karax](https://github.com/karaxnim/karax), and KRoutes. It uses both client-side and server-side rendering.
-
-# Planned Features
-
-- Routing with path wildcards.

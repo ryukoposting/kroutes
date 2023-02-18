@@ -11,8 +11,11 @@ The [master] branch always matches the latest release. The [devel] branch always
 ### Added
 
 - This changelog!
+- Router paths now support wildcards using `*`.
 
 ### Changed
+
+- `addRoute` and `addSsrRoute` now perform more strict validation of routing paths. A `ValueError` will be raised when a router path is invalid.
 
 ### Deprecated
 
