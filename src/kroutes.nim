@@ -188,7 +188,7 @@ proc addRouteInner(parent: var RouteNode, path: openArray[string], renderer: Rou
       cache: newTable[string,cstring](),
       useCache: useCache
     )
-  elif path[0].startsWith('{') and path[0].endsWith('}'):
+  elif path[0].startsWith('{'):
     let param = path[0][1..^2]
     # try to find an existing, identical node
     for sibling in parent.children.mitems:
@@ -216,6 +216,22 @@ proc addRouteInner(parent: var RouteNode, path: openArray[string], renderer: Rou
     newNode.addRouteInner(path[1..^1], renderer, useCache)
     parent.children.add newNode
 
+const PathChars = {'a'..'z', 'A'..'Z', '0'..'9', '-', '_', '.', '~', ':', '@', '!', '(', ')'}
+
+proc parsePath(path: string): seq[string] =
+  for part in path.split('/'):
+    if part.len == 0: continue
+
+    let partIsValid =
+      part == "*" or
+      part.startsWith('{') and part.endsWith('}') and part[1..^2].allCharsInSet(PathChars) or
+      part.allCharsInSet(PathChars)
+
+    if not partIsValid:
+      raise ValueError.newException(fmt"Invalid router path component '{part}'")
+
+    result.add part
+
 proc addRoute*(router: Router, path: string, renderer: RouteRenderer) =
   ## Create a route.
   ## 
@@ -229,11 +245,8 @@ proc addRoute*(router: Router, path: string, renderer: RouteRenderer) =
   ## 
   ## Support for wildcards will be added in the future.
   assert not renderer.isNil
-  var pathParts: seq[string]
-  for part in path.split('/'):
-    if part.len == 0: continue
-    pathParts.add part
-  addRouteInner(router.root, pathParts, renderer)
+  let parts = parsePath(path)
+  addRouteInner(router.root, parts, renderer)
 
 proc addSsrRoute*(router: Router, path: string, useCache=true) =
   ## Create an SSR route.
@@ -248,11 +261,8 @@ proc addSsrRoute*(router: Router, path: string, useCache=true) =
   ## By default, the AJAX request will have the path `/ssr/{clientPath}`. This can be
   ## changed by providing a different value for `ssrPath` when calling `newRouter`.
   ## The AJAX request will include the client's anchor and query string.
-  var pathParts: seq[string]
-  for part in path.split('/'):
-    if part.len == 0: continue
-    pathParts.add part
-  addRouteInner(router.root, pathParts, useCache=useCache)
+  let parts = parsePath(path)
+  addRouteInner(router.root, parts, useCache=useCache)
 
 proc getSsrRequestUri(router: Router, ctx: Context): Uri =
   result = router.ssrBaseUri
