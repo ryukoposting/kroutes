@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.1.0"
+version       = "0.1.1"
 author        = "Evan Perry Grove"
 description   = "Karax router with CSR and SSR support"
 license       = "MIT"
@@ -10,6 +10,7 @@ srcDir        = "src"
 # Dependencies
 
 requires "nim >= 1.6.10"
+requires "karax >= 1.2.2"
 
 task demo, "Run demo app":
   withDir "demo":

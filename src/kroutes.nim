@@ -2,8 +2,11 @@
 ## 
 ## # Example
 ## 
+## A more complex example is available `here.<https://github.com/ryukoposting/kroutes/tree/master/demo>`_
+## 
 ## .. code-block:: nim
 ##   include karax/prelude
+##   import kroutes
 ## 
 ##   let router = newRouter()
 ## 
@@ -214,7 +217,7 @@ proc addRouteInner(parent: var RouteNode, path: openArray[string], renderer: Rou
     parent.children.add newNode
 
 proc addRoute*(router: Router, path: string, renderer: RouteRenderer) =
-  ## Add a new route to the router.
+  ## Create a route.
   ## 
   ## The `path` string works the same way as most routers. Path parameters
   ## are specified using `{this}` syntax. Here are some examples of
@@ -234,6 +237,8 @@ proc addRoute*(router: Router, path: string, renderer: RouteRenderer) =
 
 proc addSsrRoute*(router: Router, path: string, useCache=true) =
   ## Create an SSR route.
+  ## 
+  ## For info about paths, refer to the `addRoute<#addRoute,Router,string,RouteRenderer>`_.
   ## 
   ## When an SSR route is accessed, the router will send an AJAX request to the server.
   ## The response to the AJAX request should be HTML, which will then be rendered by
