@@ -71,6 +71,7 @@ type
   RouteNodeKind* = enum
     routeKindLiteralPath,
     routeKindParameter,
+    routeKindWildcard,
     routeKindRoot,
     routeKindTerminal,
     routeKindSsrTerminal
@@ -87,7 +88,7 @@ type
     of routeKindSsrTerminal:
       useCache: bool
       cache: TableRef[string,cstring]
-    of routeKindRoot:
+    of routeKindRoot, routeKindWildcard:
       discard
 
   RouteRenderer* = proc(ctx: Context): VNode {.closure.} ##\
@@ -188,6 +189,18 @@ proc addRouteInner(parent: var RouteNode, path: openArray[string], renderer: Rou
       cache: newTable[string,cstring](),
       useCache: useCache
     )
+  elif path[0] == "*":
+    # try to find an existing, identical node
+    for sibling in parent.children.mitems:
+      if sibling.kind == routeKindWildcard:
+        sibling.addRouteInner(path[1..^1], renderer, useCache)
+        return
+    # create a new node
+    var newNode = RouteNode(
+      kind: routeKindWildcard
+    )
+    newNode.addRouteInner(path[1..^1], renderer, useCache)
+    parent.children.add newNode
   elif path[0].startsWith('{'):
     let param = path[0][1..^2]
     # try to find an existing, identical node
@@ -289,6 +302,13 @@ proc kroutesRenderer(routerData: RouterData, router: Router): VNode =
         return nil
       else:
         ctx.params[node.param] = path[0]
+        for child in node.children:
+          result = renderInner(child, path[1..^1], ctx)
+          if not result.isNil: return
+    of routeKindWildcard:
+      if path.len == 0:
+        return nil
+      else:
         for child in node.children:
           result = renderInner(child, path[1..^1], ctx)
           if not result.isNil: return
