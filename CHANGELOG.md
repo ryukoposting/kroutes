@@ -6,7 +6,9 @@ The format is based on [Keep a Changelog], and adheres to Nimble's versioning se
 
 The [master] branch always matches the latest release. The [devel] branch always contains the latest unreleased code.
 
-## [Unreleased] - 2023-02-18
+## [Unreleased] - 2023-02-19
+
+## [0.2.0] - 2023-02-19
 
 ### Added
 
@@ -40,3 +42,4 @@ The [master] branch always matches the latest release. The [devel] branch always
 [devel]: https://github.com/ryukoposting/kroutes/tree/devel
 [0.1.1]: https://github.com/ryukoposting/kroutes/releases/tag/0.1.1
 [0.1.2]: https://github.com/ryukoposting/kroutes/releases/tag/0.1.2
+[0.2.0]: https://github.com/ryukoposting/kroutes/releases/tag/0.2.0
