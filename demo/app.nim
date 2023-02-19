@@ -39,9 +39,9 @@ method rendererRoot*(router: MyRouter, content: VNode, ctx: Context): VNode =
     header:
       h1: text fmt"KRouter Demo"
       nav:
-        button(onclick = goto("/")):
+        button(onclick = () => goto("/")):
           text "Home"
-        button(onclick = goto("/about")):
+        button(onclick = () => goto("/about")):
           text "About"
     content
     footer:

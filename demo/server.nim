@@ -1,6 +1,7 @@
 import prologue
 import prologue/middlewares/staticfile
 import karax/[karaxdsl, vdom]
+import kroutes/kroutes_static
 
 proc frontend(ctx: Context) {.async.} =
   await ctx.staticFileResponse("app.html", "public")

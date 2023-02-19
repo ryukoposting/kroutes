@@ -8,7 +8,13 @@ The [master] branch always matches the latest release. The [devel] branch always
 
 ## [Unreleased] - 2023-02-18
 
-- /
+### Added
+
+- Server-side implementations of `goBack`, `goForward`, and `goTo` in `kroutes/kroutes_static`
+
+### Changed
+
+- Replace `goBack`, `goForward`, and `goTo` closures with simple procs
 
 ## [0.1.2] - 2023-02-18
 

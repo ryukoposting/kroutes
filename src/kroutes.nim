@@ -158,24 +158,41 @@ var history {.importc, nodecl.}: History
 
 proc pushState(history: History, options: HistoryShim, title: cstring, path: cstring) {.importcpp.}
 proc pushState(history: History, path: cstring) = history.pushState(HistoryShim(), cstring(""), path)
-proc state(history: History): HistoryShim {.importjs: "#.state".}
+# proc state(history: History): HistoryShim {.importjs: "#.state".}
 
-proc goTo*(path: string): proc =
-  ## Returns a function that will route the user to another page.
-  return proc =
-    let currentPath = $kdom.window.location.pathname
-    if currentPath != path:
-      history.pushState(cstring(path))
-    else:
-      discard
+proc goTo*(path: string) =
+  ## Route the user to another page.
+  ## 
+  ## This function can be called from plain JS code by calling `kroutesGoTo`.
+  let currentPath = $kdom.window.location.pathname
+  if currentPath != path:
+    history.pushState(cstring(path))
+  else:
+    discard
 
-proc goBack*(n = 1): proc =
-  ## Returns a function that will navigate backward.
-  return proc = history.go(-n)
+proc goBack*(n = 1) =
+  ## Navigate backwards by N pages.
+  ## 
+  ## This function can be called from plain JS code by calling `kroutesGoBack`.
+  history.go(-n)
 
-proc goForward*(n = 1): proc =
-  ## Returns a function that will navigate forward.
-  return proc = history.go(n)
+proc goForward*(n = 1) =
+  ## Navigate forward by N pages.
+  ## 
+  ## This function can be called from plain JS code by calling `kroutesGoForward`.
+  history.go(n)
+
+proc kroutesGoTo(path: cstring) {.exportc.} =
+  goTo($path)
+  redraw()
+
+proc kroutesGoBack(n: int) {.exportc.} =
+  goBack(n)
+  redraw()
+
+proc kroutesGoForward(n: int) {.exportc.} =
+  goForward(n)
+  redraw()
 
 proc addRouteInner(parent: var RouteNode, path: openArray[string], renderer: RouteRenderer = nil, useCache=false) =
   if path.len == 0 and not renderer.isNil:
